@@ -1,0 +1,17 @@
+@use '../../../styles/_variables.sass' as Variables
+@use '../../../styles/_mixins.sass' as Mixins
+
+.comment-list 
+    @include Mixins.flex($direction: column)
+    padding: 2rem
+    gap: 1rem
+    background: var(--bg-accent)
+    border-radius: 10px
+
+    .header 
+        @include Mixins.flex-between($direction: row)
+        margin-bottom: 1.5rem
+        
+    .card 
+        background: var(--background) !important
+        
