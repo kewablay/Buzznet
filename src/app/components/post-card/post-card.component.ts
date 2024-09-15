@@ -1,14 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 import { CardComponent } from '../card/card.component';
-import { Post } from '../../models/app.model';
+import { Post, Comment } from '../../models/app.model';
+import { ApiService } from '../../services/api.service';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, AsyncPipe],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.sass',
 })
 export class PostCardComponent {
   @Input() post!: Post;
+  comments$!: Observable<Comment[]>;
+
+  constructor(private api: ApiService) {
+    if (this.post) {
+      this.comments$ = this.api.getPostComments(this.post.id);
+    }
+  }
+
+  ngOnChanges() {
+    if (this.post) {
+      this.comments$ = this.api.getPostComments(this.post.id);
+    }
+  }
+
+  deletePost(id: number, event: Event) {
+    event.stopPropagation();
+    this.api.deletePost(id);
+  }
 }
