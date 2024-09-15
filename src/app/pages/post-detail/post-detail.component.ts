@@ -16,6 +16,7 @@ import { PostSkeletonComponent } from '../../components/skeletons/post-skeleton/
 import { Store } from '@ngrx/store';
 import { selectPostById, selectPostLoading } from '../../store/post-selectors/post.selectors';
 import { updatePost } from '../../store/post-actions/post.actions';
+import { CommentSkeletonComponent } from "../../components/skeletons/comment-skeleton/comment-skeleton.component";
 
 @Component({
   selector: 'app-post-detail',
@@ -31,7 +32,8 @@ import { updatePost } from '../../store/post-actions/post.actions';
     PostFormComponent,
     SkeletonModule,
     PostSkeletonComponent,
-  ],
+    CommentSkeletonComponent
+],
 
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.sass',
@@ -40,6 +42,7 @@ export class PostDetailComponent {
   singlePost$!: Observable<PostWithComments | undefined>;
   visible: boolean = false;
   postLoading$: Observable<boolean>;
+  mockCommentForLoading = [...Array(3)];
 
   constructor(private route: ActivatedRoute, private store: Store) {
     this.singlePost$ = this.route.paramMap.pipe(

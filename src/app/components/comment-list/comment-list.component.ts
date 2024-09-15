@@ -16,5 +16,5 @@ import { CommentSkeletonComponent } from '../skeletons/comment-skeleton/comment-
 })
 export class CommentListComponent {
   @Input() postComments!: Comment[];
-  mockCommentForLoading = [...Array(3)];
+
 }

@@ -86,8 +86,14 @@
       />
     </ng-template>
   </p-dialog>
-  } @if(postLoading$ | async) {
+  } 
+  
+  @if(postLoading$ | async) {
   <app-post-skeleton />
-  <app-comment-list />
+  <div class="comment-skeleton-container">
+    <app-comment-skeleton />
+    <app-comment-skeleton />
+    <app-comment-skeleton />
+  </div>
   }
 </div>
