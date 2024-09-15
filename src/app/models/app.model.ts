@@ -14,12 +14,9 @@ export interface Comment {
 }
 
 // create new post post data
-export interface CreatePostData {
+export interface PostData {
   title: string;
   body: string;
   userId: number;
-}
-
-export interface UpdatePostData extends CreatePostData {
-  id: number;
+  id?: number;
 }
