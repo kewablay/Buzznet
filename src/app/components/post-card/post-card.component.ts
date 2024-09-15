@@ -4,6 +4,7 @@ import {  PostWithComments } from '../../models/app.model';
 import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { deletePost } from '../../store/post-actions/post.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -15,10 +16,17 @@ import { deletePost } from '../../store/post-actions/post.actions';
 export class PostCardComponent {
   @Input() post!: PostWithComments;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
+  
   deletePost(id: number, event: Event) {
     event.stopPropagation();
+    const url = window.location.href;
+    const isDetailPage = url.includes('/post-detail/');
+    
     this.store.dispatch(deletePost({ postId: id }));
+    if (isDetailPage) {
+      this.router.navigate(['/']);
+    }
   }
 }
