@@ -1,17 +1,18 @@
 <section class="comment-list">
   <div class="header">
     <h2>Comments</h2>
-    <p>Total: <span class="text-primary">10</span></p>
+    <p>
+      Total: <span class="text-primary">{{ (comments$ | async)?.length }}</span>
+    </p>
   </div>
-
+  @for(comment of comments$ | async; track comment) {
   <app-card [backgroundColor]="'var(--background)'">
     <h4 card-title>
-      Sunt aut repellat provident occaecati excepturi optio reprehenderit
+      {{ comment.name }}
     </h4>
     <p card-description class="text-secondary">
-      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-      doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-      inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+      {{ comment.body }}
     </p>
   </app-card>
+  }
 </section>
