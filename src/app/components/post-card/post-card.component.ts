@@ -30,6 +30,16 @@ export class PostCardComponent {
 
   deletePost(id: number, event: Event) {
     event.stopPropagation();
-    this.api.deletePost(id);
+    this.api.deletePost(id).subscribe({
+      next: (data) => {
+        console.log('Post deleted successfully', data);
+        this.api
+          .getPosts()
+          .subscribe((data) => console.log('data after delete: ', data));
+      },
+      error: (error) => {
+        console.error('Error deleting post:', error);
+      },
+    });
   }
 }
