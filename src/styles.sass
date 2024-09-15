@@ -1,7 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
 @use './styles/_variables.sass' as Variables
 @use './styles/_theme.sass' as Theme
 @use './styles/_mixins.sass' as Mixins
+
+// prime ng styles 
+@import "primeng/resources/themes/lara-light-blue/theme.css"
+@import "primeng/resources/primeng.min.css"
+
 
 body
     background: var(--background)
@@ -18,7 +22,9 @@ body
     button
         cursor: pointer 
 
-
+    button:disabled
+        cursor: not-allowed
+        background: #545542 !important
 // Utility classes 
 .content-wrapper 
     @include Mixins.flex($direction: column)
@@ -56,7 +62,22 @@ body
 
 .btn-warning 
     @include Mixins.button($bg-color: var(--background), $color: Variables.$clr-red)
-    
+
+// prime ng styles 
+.p-inputtext, .p-inputtextarea  
+    background: var(--background) !important
+    color: var(--text) !important
+    border: none
+
+.p-inputtext:focus, .p-inputtextarea:focus
+    outline: none !important
+
+.p-inputtext:enabled:focus, .p-inputtextarea:enabled:focus 
+    outline: none 0px
+    outline-offset: 0px
+    box-shadow: var(--primary) 0px 0px 0px 0.02rem
+    border-color: var(--primary) !important
+
 
 @media screen and (min-width: 678px)
     h1
