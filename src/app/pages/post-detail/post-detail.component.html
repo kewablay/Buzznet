@@ -67,9 +67,9 @@
   </app-header>
 
   <!-- post card  -->
-  @if(post$ | async; as post) {
+  @if(singlePost$ | async; as post) {
   <app-post-card [post]="post" />
-  <app-comment-list [postId]="post.id" />
+  <app-comment-list [postComments]="post.comments" />
 
   <!-- dialoge  -->
 
@@ -86,7 +86,8 @@
       />
     </ng-template>
   </p-dialog>
-  } @else {
+  } @if(postLoading$ | async) {
   <app-post-skeleton />
+  <app-comment-list />
   }
 </div>

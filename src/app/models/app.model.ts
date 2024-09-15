@@ -5,6 +5,10 @@ export interface Post {
   body: string;
 }
 
+export interface PostWithComments extends Post {
+  comments: Comment[];
+}
+
 export interface Comment {
   postId: number;
   id: number;
@@ -19,4 +23,10 @@ export interface PostData {
   body: string;
   userId: number;
   id?: number;
+}
+
+
+
+export interface PostDataWithComments extends PostData { 
+  comments: Comment[];
 }

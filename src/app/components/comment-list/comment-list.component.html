@@ -2,10 +2,10 @@
   <div class="header">
     <h2>Comments</h2>
     <p>
-      Total: <span class="text-primary">{{ (comments$ | async)?.length }}</span>
+      Total: <span class="text-primary">{{ postComments.length }}</span>
     </p>
   </div>
-  @for(comment of comments$ | async; track comment) {
+  @for(comment of postComments; track comment) {
   <app-card [backgroundColor]="'var(--background)'">
     <h4 card-title>
       {{ comment.name }}

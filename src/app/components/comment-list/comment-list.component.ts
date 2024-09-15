@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Comment } from '../../models/app.model';
 import { SkeletonModule } from 'primeng/skeleton';
-import { CommentSkeletonComponent } from "../skeletons/comment-skeleton/comment-skeleton.component";
+import { CommentSkeletonComponent } from '../skeletons/comment-skeleton/comment-skeleton.component';
 
 @Component({
   selector: 'app-comment-list',
@@ -15,15 +15,6 @@ import { CommentSkeletonComponent } from "../skeletons/comment-skeleton/comment-
   styleUrl: './comment-list.component.sass',
 })
 export class CommentListComponent {
-  @Input() postId!: number;
-  comments$: Observable<Comment[]>;
-
-  mockCommentForLoading = [...Array(3)]
-  constructor(private api: ApiService) {
-    this.comments$ = this.api.getPostComments(this.postId);
-  }
-
-  ngOnChanges() {
-    this.comments$ = this.api.getPostComments(this.postId);
-  }
+  @Input() postComments!: Comment[];
+  mockCommentForLoading = [...Array(3)];
 }

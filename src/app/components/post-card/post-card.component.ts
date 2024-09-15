@@ -1,9 +1,9 @@
 import { Component, Input, SimpleChange } from '@angular/core';
 import { CardComponent } from '../card/card.component';
-import { Post, Comment } from '../../models/app.model';
-import { ApiService } from '../../services/api.service';
-import { Observable } from 'rxjs';
+import {  PostWithComments } from '../../models/app.model';
 import { AsyncPipe } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { deletePost } from '../../store/post-actions/post.actions';
 
 @Component({
   selector: 'app-post-card',
@@ -13,23 +13,12 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './post-card.component.sass',
 })
 export class PostCardComponent {
-  @Input() post!: Post;
-  comments$!: Observable<Comment[]>;
+  @Input() post!: PostWithComments;
 
-  constructor(private api: ApiService) {
-    if (this.post) {
-      this.comments$ = this.api.getPostComments(this.post.id);
-    }
-  }
-
-  ngOnChanges() {
-    if (this.post) {
-      this.comments$ = this.api.getPostComments(this.post.id);
-    }
-  }
+  constructor(private store: Store) {}
 
   deletePost(id: number, event: Event) {
     event.stopPropagation();
-    this.api.deletePost(id).subscribe();
+    this.store.dispatch(deletePost({ postId: id }));
   }
 }

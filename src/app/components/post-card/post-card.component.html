@@ -35,7 +35,9 @@
             />
           </svg>
 
-         {{ (comments$ | async)?.length }}
+          @if(post && post.comments){
+          {{ post.comments.length }}
+          }
         </div>
 
         <button class="btn-warning" (click)="deletePost(post.id, $event)">
