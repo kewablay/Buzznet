@@ -41,7 +41,6 @@ export class PostFormComponent {
   }
 
   ngOnInit() {
-    console.log('psot', this.post);
     this.postForm = this.fb.group({
       title: new FormControl(this.post?.title || '', [
         Validators.required,
@@ -73,7 +72,7 @@ export class PostFormComponent {
       else {
         const postData: PostData = {
           ...this.postForm.value,
-          id: crypto.randomUUID(),
+          id: Math.floor(Math.random() * 100000) + 100,
         };
         this.submitPost.emit(postData);
         this.postForm.reset();

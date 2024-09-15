@@ -1,10 +1,11 @@
 <section class="post-list">
-  @if(posts$ | async; as posts){ @for(post of posts; track post) {
+  @if(allPosts$ | async; as posts){ @for(post of posts; track post) {
   <app-post-card [routerLink]="['/post-detail', post.id]" [post]="post" />
-  } } @else {
+  } } @if(postLoading$ | async) {
   <!-- show loading skeleton -->
   @for(post of mockPostForLoading; track post) {
   <app-post-skeleton />
-
-  } }
+  } } @if(postError$ | async) {
+  <p>Failed to fetch posts.</p>
+  }
 </section>

@@ -4,7 +4,8 @@ import { PostListComponent } from '../../components/post-list/post-list.componen
 import { DialogModule } from 'primeng/dialog';
 import { PostFormComponent } from '../../components/post-form/post-form.component';
 import { PostData } from '../../models/app.model';
-import { ApiService } from '../../services/api.service';
+import { Store } from '@ngrx/store';
+import { createPost } from '../../store/post-actions/post.actions';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ import { ApiService } from '../../services/api.service';
 export class HomeComponent {
   visible: boolean = false;
 
-  constructor(private api: ApiService) {}
+  constructor(private store: Store) {}
   showDialog() {
     this.visible = true;
   }
@@ -30,9 +31,7 @@ export class HomeComponent {
   }
 
   createPost(postData: PostData) {
-    console.log('new post data: ', postData);
-    this.api.createPost(postData).subscribe();
-
+    this.store.dispatch(createPost({ postData }));
     this.closeModal();
   }
 }

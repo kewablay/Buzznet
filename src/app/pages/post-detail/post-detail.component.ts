@@ -3,7 +3,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
 import { CommentListComponent } from '../../components/comment-list/comment-list.component';
 import { CardComponent } from '../../components/card/card.component';
-import { Post, PostData } from '../../models/app.model';
+import { Post, PostData, PostWithComments } from '../../models/app.model';
 import { Observable, switchMap } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,11 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { PostFormComponent } from '../../components/post-form/post-form.component';
 import { SkeletonModule } from 'primeng/skeleton';
-import { PostSkeletonComponent } from "../../components/skeletons/post-skeleton/post-skeleton.component";
+import { PostSkeletonComponent } from '../../components/skeletons/post-skeleton/post-skeleton.component';
+import { Store } from '@ngrx/store';
+import { selectPostById, selectPostLoading } from '../../store/post-selectors/post.selectors';
+import { updatePost } from '../../store/post-actions/post.actions';
+import { CommentSkeletonComponent } from "../../components/skeletons/comment-skeleton/comment-skeleton.component";
 
 @Component({
   selector: 'app-post-detail',
@@ -27,23 +31,28 @@ import { PostSkeletonComponent } from "../../components/skeletons/post-skeleton/
     ButtonModule,
     PostFormComponent,
     SkeletonModule,
-    PostSkeletonComponent
+    PostSkeletonComponent,
+    CommentSkeletonComponent
 ],
 
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.sass',
 })
 export class PostDetailComponent {
-  post$!: Observable<Post>;
+  singlePost$!: Observable<PostWithComments | undefined>;
   visible: boolean = false;
+  postLoading$: Observable<boolean>;
+  mockCommentForLoading = [...Array(3)];
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {
-    this.post$ = this.route.paramMap.pipe(
+  constructor(private route: ActivatedRoute, private store: Store) {
+    this.singlePost$ = this.route.paramMap.pipe(
       switchMap((params) => {
         const postId = params.get('id');
-        return this.api.getSinglePost(Number(postId));
+        return this.store.select(selectPostById(Number(postId)));
       })
     );
+
+    this.postLoading$ = this.store.select(selectPostLoading);
   }
 
   showDialog() {
@@ -53,9 +62,9 @@ export class PostDetailComponent {
     this.visible = false;
   }
 
-  editPost(postData: PostData) {
+  editPost(postData: any) {
     console.log('new post data: ', postData);
-    this.api.udpatePost(postData).subscribe();
+    this.store.dispatch(updatePost({ postData }));
     this.closeModal();
   }
 }
