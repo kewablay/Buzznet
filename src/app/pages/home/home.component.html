@@ -1,7 +1,7 @@
 <div class="content-wrapper">
   <!-- header  -->
   <app-header>
-    <button button class="btn">
+    <button (click)="showDialog()" button class="btn">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -40,3 +40,18 @@
 
   <app-post-list />
 </div>
+
+<!-- dialoge  -->
+
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+>
+  <ng-template pTemplate="headless">
+    <app-post-form
+      (closeModal)="closeModal()"
+      (submitPost)="createPost($event)"
+    />
+  </ng-template>
+</p-dialog>

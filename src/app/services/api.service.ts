@@ -1,10 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  CreatePostData,
   Post,
-  UpdatePostData,
   Comment,
+  PostData,
 } from '../models/app.model';
 import { environment } from '../../environments/environment.development';
 import { catchError, Observable, retry, tap, throwError } from 'rxjs';
@@ -40,14 +39,14 @@ export class ApiService {
   }
 
   // create a post
-  createPost(postData: CreatePostData): Observable<Post> {
+  createPost(postData: PostData): Observable<Post> {
     return this.http
       .post<Post>(`${this.BASE_URL}/posts`, postData)
       .pipe(catchError(this.handleError));
   }
 
   // updated a post
-  udpatePost(postData: UpdatePostData): Observable<Post> {
+  udpatePost(postData: PostData): Observable<Post> {
     return this.http
       .put<Post>(`${this.BASE_URL}/posts/${postData.id}`, postData)
       .pipe(catchError(this.handleError));
@@ -61,6 +60,7 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
