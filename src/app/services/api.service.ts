@@ -1,40 +1,36 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  Post,
-  Comment,
-  PostData,
-} from '../models/app.model';
+import { Post, Comment, PostData } from '../models/app.model';
 import { environment } from '../../environments/environment.development';
 import { catchError, Observable, retry, tap, throwError } from 'rxjs';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cacheService: CacheService) {}
 
   BASE_URL = environment.apiUrl;
 
   // Get all post
   getPosts(): Observable<Post[]> {
-    return this.http
-      .get<Post[]>(`${this.BASE_URL}/posts`)
+    return this.cacheService
+      .get(`${this.BASE_URL}/posts`)
       .pipe(retry(3), catchError(this.handleError));
   }
 
   // Get a single post
   getSinglePost(id: number): Observable<Post> {
-    return this.http
-      .get<Post>(`${this.BASE_URL}/posts/${id}`)
+    return this.cacheService
+      .get(`${this.BASE_URL}/posts/${id}`)
       .pipe(catchError(this.handleError));
   }
 
   // Get post comments
   getPostComments(id: number): Observable<Comment[]> {
-    console.log('about to get post comments...', id);
-    return this.http
-      .get<Comment[]>(`${this.BASE_URL}/comments?postId=${id}`)
+    return this.cacheService
+      .get(`${this.BASE_URL}/comments?postId=${id}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -54,13 +50,11 @@ export class ApiService {
 
   // delete  a post
   deletePost(id: number): Observable<any> {
-    console.log('About to delete post : ', id);
     return this.http.delete<any>(`${this.BASE_URL}/posts/${id}`).pipe(
       tap(() => console.log(`deleted post with id=${id}`)),
       catchError(this.handleError)
     );
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
