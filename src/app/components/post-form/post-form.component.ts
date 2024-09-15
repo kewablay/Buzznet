@@ -54,15 +54,6 @@ export class PostFormComponent {
     });
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes['post'] && this.post) {
-  //     // Update form values with post data if available
-  //     this.postForm?.patchValue({
-  //       title: this.post.title,
-  //       body: this.post.body,
-  //     });
-  //   }
-  // }
 
   closePostModal() {
     this.closeModal.emit();

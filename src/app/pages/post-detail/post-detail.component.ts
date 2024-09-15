@@ -11,6 +11,8 @@ import { AsyncPipe } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { PostFormComponent } from '../../components/post-form/post-form.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { PostSkeletonComponent } from "../../components/skeletons/post-skeleton/post-skeleton.component";
 
 @Component({
   selector: 'app-post-detail',
@@ -24,7 +26,9 @@ import { PostFormComponent } from '../../components/post-form/post-form.componen
     DialogModule,
     ButtonModule,
     PostFormComponent,
-  ],
+    SkeletonModule,
+    PostSkeletonComponent
+],
 
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.sass',

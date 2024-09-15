@@ -1,8 +1,10 @@
 <section class="post-list">
-  @if(posts$ | async; as posts){
+  @if(posts$ | async; as posts){ @for(post of posts; track post) {
+  <app-post-card [routerLink]="['/post-detail', post.id]" [post]="post" />
+  } } @else {
+  <!-- show loading skeleton -->
+  @for(post of mockPostForLoading; track post) {
+  <app-post-skeleton />
 
-    @for(post of posts; track post) {
-    <app-post-card [routerLink]="['/post-detail', post.id]" [post]="post"  />
-    }
-  }
+  } }
 </section>

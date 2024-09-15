@@ -14,5 +14,8 @@
       {{ comment.body }}
     </p>
   </app-card>
-  }
+  } @empty { @for(comment of mockCommentForLoading; track comment) {
+  <app-comment-skeleton />
+
+  } }
 </section>
