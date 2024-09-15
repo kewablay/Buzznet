@@ -1,0 +1,31 @@
+@use '../../../styles/_variables.sass' as Variables
+@use '../../../styles/_mixins.sass' as Mixins
+    
+.post-form
+    background: var(--bg-accent)
+    border-radius: 10px
+    padding: 2rem
+    @include Mixins.flex($direction: column)
+    gap: 2rem
+    font-family: Variables.$font-kulim !important
+    box-shadow: 0 0 2px white
+    
+
+    .header 
+        font-size: Variables.$fs-300
+
+        button
+            background-color: var(--bg-accent)
+            border: none    
+    
+    .input-group
+        @include Mixins.flex($direction: column)
+        gap: 1rem
+    
+        button
+            @include Mixins.button($bg-color: var(--primary) , $color: black)
+            font-weight: bold
+            font-size: Variables.$fs-200
+            width: fit-content
+            margin-left: auto
+            

@@ -1,0 +1,68 @@
+<form [formGroup]="postForm" class="post-form" (submit)="onSubmit()">
+  <!-- header  -->
+  <div class="header flex-row-btween">
+    <h2>{{post? 'Update Post' : 'Create Post'}}</h2>
+    <button type="button" (click)="closePostModal()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="25"
+        viewBox="0 0 24 25"
+        fill="none"
+      >
+        <path
+          d="M13.9902 10.51L14.8302 9.67004"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M9.16992 15.33L11.9199 12.58"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M14.8299 15.33L9.16992 9.67004"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M4 6.5C2.75 8.17 2 10.25 2 12.5C2 18.02 6.48 22.5 12 22.5C17.52 22.5 22 18.02 22 12.5C22 6.98 17.52 2.5 12 2.5C10.57 2.5 9.2 2.8 7.97 3.35"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
+  <!-- header ends -->
+
+  <div class="input-group">
+    <!-- Title input -->
+    <input
+      type="text"
+      pInputText
+      formControlName="title"
+      placeholder="Enter title"
+    />
+
+    <!-- Content textarea -->
+    <textarea
+      rows="6"
+      cols="40"
+      pInputTextarea
+      formControlName="body"
+      placeholder="Write your post..."
+    ></textarea>
+    <!-- Submit button -->
+    <button  type="submit" class="btn-primary" type="submit" [disabled]="postForm.invalid">
+      {{post? 'Update Post' : 'Create Post'}}
+    </button>
+  </div>
+</form>
