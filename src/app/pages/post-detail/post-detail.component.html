@@ -69,6 +69,6 @@
   <!-- post card  -->
   @if(post$ | async; as post) {
   <app-post-card [post]="post" />
+  <app-comment-list [postId]="post.id" />
   }
-  <app-comment-list />
 </div>
