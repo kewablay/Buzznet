@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PostCardComponent } from '../post-card/post-card.component';
 import { CardComponent } from '../card/card.component';
-import { Post } from '../../models/posts.model';
+import { Post } from '../../models/app.model';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { AsyncPipe } from '@angular/common';
