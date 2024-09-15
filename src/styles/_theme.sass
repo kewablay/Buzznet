@@ -1,0 +1,29 @@
+// @use './_variables.sass' as Variables
+  
+// // Theme Colors
+// $dark-mode: (background: Variables.$dark-purple, primary: Variables.$clr-primary, bg-accent: Variables.$clr-black, bg-accent-100: Variables.$clr-purple-700, text: Variables.$clr-white, text-secondary: Variables.$clr-grey, highlight: Variables.$clr-primary)
+// $light-mode: (background: Variables.$clr-light-bg, primary: Variables.$clr-primary, bg-accent: Variables.$clr-light-accent, bg-accent-100: Variables.$clr-light-accent-100, text: Variables.$clr-black, text-secondary: Variables.$clr-black, highlight: Variables.$clr-black)
+
+// :root 
+//   @each $key, $value in $dark-mode 
+//     --#{$key}: #{$value}
+  
+// [data-theme="light"]
+//   @each $key, $value in $light-mode
+//     --#{$key}: #{$value}
+
+@use './_variables.sass' as Variables
+
+// Theme colors 
+
+$dark-mode: (background: Variables.$bg-dark, primary: Variables.$clr-primary, bg-accent: Variables.$bg-dark-accent, clr-warning: Variables.$clr-red, text: Variables.$clr-white, text-secondary: Variables.$clr-gray)
+$light-mode: (background: Variables.$bg-light, primary: Variables.$clr-primary, bg-accent: Variables.$bg-light-accent, clr-warning: Variables.$clr-red, text: Variables.$clr-black, text-secondary: Variables.$clr-gray-500)
+
+
+:root 
+  @each $key, $value in $dark-mode 
+    --#{$key}: #{$value}
+  
+[data-theme="light"]
+  @each $key, $value in $light-mode
+    --#{$key}: #{$value}

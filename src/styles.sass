@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/_variables.sass' as Variables
+@use './styles/_theme.sass' as Theme
+@use './styles/_mixins.sass' as Mixins
+
+body
+    background: var(--background)
+    color: var(--text)
+    font-family: Variables.$font-kulim
+
+    h1
+        font-size: Variables.$fs-700
+    h1, h2, h3, h4, h5, h6, p
+        margin-block: 0
+    h4
+        font-size: Variables.$fs-400 
+    
+    button
+        cursor: pointer 
+
+
+// Utility classes 
+.content-wrapper 
+    @include Mixins.flex($direction: column)
+    max-width: 628px
+    gap: 2rem
+    margin-inline: auto
+
+    
+.text-secondary
+    color: var(--text-secondary)
+
+.text-warning
+    color: var(--clr-warning)
+.text-primary   
+    color: var(--primary)
+
+.flex-row-btween
+    @include Mixins.flex-between($direction: row)
+    
+    
+
+.btn 
+    @include Mixins.button($bg-color: Variables.$clr-primary , $color: Variables.$clr-black )
+
+    .icon
+        svg
+            width: 18
+            height: 18
+
+.btn-ghost 
+    @include Mixins.button($bg-color: var(--background), $color: Variables.$clr-primary)
+    cursor: auto
+    font-weight: 400
+
+
+.btn-warning 
+    @include Mixins.button($bg-color: var(--background), $color: Variables.$clr-red)
+    
+
+@media screen and (min-width: 678px)
+    h1
+        font-size: Variables.$fs-800 !important
+    .btn
+        font-size: Variables.$fs-200
+    h4
+        font-size: Variables.$fs-500 !important
