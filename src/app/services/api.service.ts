@@ -1,8 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreatePostData, Post, UpdatePostData } from '../models/app.model';
+import {
+  CreatePostData,
+  Post,
+  UpdatePostData,
+  Comment,
+} from '../models/app.model';
 import { environment } from '../../environments/environment.development';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { catchError, Observable, retry, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +33,9 @@ export class ApiService {
 
   // Get post comments
   getPostComments(id: number): Observable<Comment[]> {
+    console.log('about to get post comments...', id);
     return this.http
-      .get<Comment[]>(`${this.BASE_URL}/posts/${id}/comments`)
+      .get<Comment[]>(`${this.BASE_URL}/comments?postId=${id}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -49,9 +55,11 @@ export class ApiService {
 
   // delete  a post
   deletePost(id: number): Observable<any> {
-    return this.http
-      .delete<any>(`${this.BASE_URL}/posts/${id}`)
-      .pipe(catchError(this.handleError));
+    console.log('About to delete post : ', id);
+    return this.http.delete<any>(`${this.BASE_URL}/posts/${id}`).pipe(
+      tap(() => console.log(`deleted post with id=${id}`)),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
