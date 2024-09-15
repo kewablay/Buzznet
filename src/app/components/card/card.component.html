@@ -1,0 +1,9 @@
+<div class="card" [style]="{ 'background-color': backgroundColor }">
+  <ng-content select="[card-header]"> </ng-content>
+  <div class="card-body">
+    <ng-content select="[card-title]"></ng-content>
+    <ng-content select="[card-description]"></ng-content>
+  </div>
+
+  <ng-content class="card-footer" select="[card-footer]"></ng-content>
+</div>
