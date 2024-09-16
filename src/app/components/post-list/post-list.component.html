@@ -1,5 +1,5 @@
 <section class="post-list">
-  @if(allPosts$ | async; as posts){ @for(post of posts | paginate: { itemsPerPage: 10, currentPage: p }; track post) {
+  @if(allPosts$ | async; as posts){ @for(post of posts | paginate: { itemsPerPage: 5, currentPage: p }; track post) {
   <app-post-card [routerLink]="['/post-detail', post.id]" [post]="post" />
   } } @if(postLoading$ | async) {
   <!-- show loading skeleton -->

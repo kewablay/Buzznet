@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { PostCardComponent } from '../post-card/post-card.component';
 import { CardComponent } from '../card/card.component';
-import { Post, PostWithComments } from '../../models/app.model';
+import {  PostWithComments } from '../../models/app.model';
 import { Observable } from 'rxjs';
-import { ApiService } from '../../services/api.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
