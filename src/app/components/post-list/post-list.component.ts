@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { PostSkeletonComponent } from '../skeletons/post-skeleton/post-skeleton.component';
 import { Store } from '@ngrx/store';
+import { NgxPaginationModule } from 'ngx-pagination';
 import {
   selectAllPosts,
   selectPostError,
@@ -25,6 +26,7 @@ import {
     RouterLink,
     SkeletonModule,
     PostSkeletonComponent,
+    NgxPaginationModule,
   ],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.sass',
@@ -34,6 +36,7 @@ export class PostListComponent {
 
   postLoading$: Observable<boolean>;
   postError$!: Observable<any>;
+  p: number = 1;
 
   allPosts$: Observable<PostWithComments[]>;
   constructor(private store: Store) {

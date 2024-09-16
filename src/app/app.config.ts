@@ -11,6 +11,7 @@ import { loggingInterceptor } from './interceptors/auth.interceptor';
 import { provideEffects } from '@ngrx/effects';
 import { PostEffects } from './store/post-effects/post.effects';
 import { PostReducer } from './store/post-reducers/post.reducers';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +23,6 @@ export const appConfig: ApplicationConfig = {
     BrowserModule,
     importProvidersFrom(BrowserAnimationsModule),
     provideEffects(),
+    NgxPaginationModule,
   ],
 };
