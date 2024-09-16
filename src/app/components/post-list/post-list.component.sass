@@ -5,10 +5,16 @@
     @include Mixins.flex($direction: column)
     gap: 1rem
     
-
     .controls
+        margin-inline: auto
+
+
+    .controls ::ng-deep .ngx-pagination .ng-star-inserted
+        color: var(--text-secondary)
+
+    .controls ::ng-deep .ngx-pagination
         color: var(--text) !important
-        a
-            span:not(.show-for-sr)
-                color: var(--text) !important
-                text-decoration: none
+        .current
+            background: var(--primary)
+            color: black
+            border-radius: 2px
